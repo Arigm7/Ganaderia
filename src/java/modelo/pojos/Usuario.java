@@ -13,7 +13,7 @@ public class Usuario {
     private String estatus;
     private Integer idRol;
     private Integer idEstatus;
-
+//come
     public Usuario() {
     }
 
