@@ -22,5 +22,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     
     <mappers>
       <!--<mapper resource="modelo/mybatis/mappers/UsuarioMapper.xml"/> -->
+      <mapper resource="modelo/mybatis/mappers/SesionMapper.xml"/>
     </mappers>
 </configuration>

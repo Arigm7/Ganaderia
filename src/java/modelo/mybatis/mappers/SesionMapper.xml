@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Sesion">
     <select id="login" resultType="modelo.pojos.Usuario" parameterType="map" statementType="CALLABLE">
-        {CALL sare.sp_login(
+        {CALL ganaderia.sp_login(
         #{usuario,jdbcType=VARCHAR,mode=IN},
-        #{contrasena,jdbcType=VARCHAR,mode=IN})}
+        #{password,jdbcType=VARCHAR,mode=IN})}
     </select>
 </mapper>

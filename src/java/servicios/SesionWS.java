@@ -32,27 +32,23 @@ public class SesionWS {
     @POST
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Respuesta login(@FormParam("usuario") String usuario, @FormParam("contrasena") String contrasena){
+    public Respuesta login(@FormParam("usuario") String usuario, @FormParam("password") String password){
         
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
         
         try{
-            HashMap<String,String> param = new HashMap<String,String>(); //clave - valor
+            HashMap<String,String> param = new HashMap<String,String>(); 
             param.put("usuario", usuario);
-            param.put("contrasena", JavaUtils.hashString(contrasena.toUpperCase()));
+            param.put("password", JavaUtils.hashString(password.toUpperCase()));
             Usuario u = conn.selectOne("Sesion.login", param);
             if(u == null || u.getIdUsuario() == null){
                 res.setError(true);
                 res.setMensaje("No se encontro ningun usuario con esas credenciales");
             }else{
                 JSONObject jo = new JSONObject(u);
-                //String cad = new Gson().toJson(jo);
-                //System.out.println(jo);
-                //System.out.println(cad);
                 res.setRespuesta(jo);
             }
-            
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{

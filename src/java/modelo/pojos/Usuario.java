@@ -7,28 +7,22 @@ public class Usuario {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String usuario;
-    private String contrasena;
-    private String celular;
-    private String rol;
+    private String password;
     private String estatus;
     private Integer idRol;
-    private Integer idEstatus;
-//come
+
     public Usuario() {
     }
 
-    public Usuario(Integer idUsuario, String nombre, String apellidoPaterno, String apellidoMaterno, String usuario, String contrasena, String celular, String rol, String estatus, Integer idRol, Integer idEstatus) {
+    public Usuario(Integer idUsuario, String nombre, String apellidoPaterno, String apellidoMaterno, String usuario, String password, String estatus, Integer idRol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.usuario = usuario;
-        this.contrasena = contrasena;
-        this.celular = celular;
-        this.rol = rol;
+        this.password = password;
         this.estatus = estatus;
         this.idRol = idRol;
-        this.idEstatus = idEstatus;
     }
 
     public Integer getIdUsuario() {
@@ -71,28 +65,12 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEstatus() {
@@ -111,13 +89,6 @@ public class Usuario {
         this.idRol = idRol;
     }
 
-    public Integer getIdEstatus() {
-        return idEstatus;
-    }
-
-    public void setIdEstatus(Integer idEstatus) {
-        this.idEstatus = idEstatus;
-    }
     
     
 }
