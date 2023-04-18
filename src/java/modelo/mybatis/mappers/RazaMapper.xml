@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Raza">
+    <select id="getAllRaza" resultType="modelo.pojos.Raza" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllRaza()}
+    </select>
+    
+    <select id="getAllRazaActivo" resultType="modelo.pojos.Raza" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllRaza_activo()}
+    </select>
+    
+    <insert id="registrarRaza" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_registrarRaza(#{nombre,jdbcType=VARCHAR,mode=IN})}
+    </insert>
+    
+    <update id="actualizarRaza" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarRaza(
+        #{idRaza,jdbcType=INTEGER,mode=IN},
+        #{nombre,jdbcType=VARCHAR,mode=IN},
+        #{estatus,jdbcType=VARCHAR,mode=IN})}
+    </update>
+    
+    <update id="eliminarRaza" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_eliminarRaza(
+        #{idRaza,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarEstatusRaza(
+        #{idRaza,jdbcType=INTEGER,mode=IN})}
+    </update>
+</mapper>
+
