@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Catalogo">
+    <select id="getAllCatalogo" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllCatalogoConcepto()}
+    </select>
+    
+    <select id="getAllCatalogoActivo" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllCatalogo_activo()}
+    </select>
+    
+    <select id="getAllCatalogoIngreso" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllCatalogo_ingreso()}
+    </select>
+    
+    <select id="getAllCatalogoEgreso" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllCatalogo_egreso()}
+    </select>
+    
+    <insert id="registrarCatalogo" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_registrarCatalogoConcepto(
+        #{catalogo,jdbcType=VARCHAR,mode=IN},
+        #{concepto,jdbcType=VARCHAR,mode=IN})}
+    </insert>
+    
+    <update id="actualizarCatalogo" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarCatalogoConcepto(
+        #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN},
+        #{catalogo,jdbcType=VARCHAR,mode=IN},
+        #{concepto,jdbcType=VARCHAR,mode=IN})}
+    </update>
+    
+    <update id="eliminarCatalogo" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_eliminarCatalogoConcepto(
+        #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarEstatusCatalogo(
+        #{idCatalogoConceptos,jdbcType=INTEGER,mode=IN})}
+    </update>
+</mapper>
+
+

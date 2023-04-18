@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.Raza;
 import modelo.pojos.Respuesta;
-import modelo.pojos.Usuario;
 import org.apache.ibatis.session.SqlSession;
 import utils.JavaUtils;
 
