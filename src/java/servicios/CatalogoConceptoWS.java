@@ -32,10 +32,7 @@ public class CatalogoConceptoWS {
     public CatalogoConceptoWS() {
     }
 
-    /**
-     * Retrieves representation of an instance of servicios.CatalogoConceptoWS
-     * @return an instance of java.lang.String
-     */
+ 
     @GET
     @Path("getAllCatalogo")
     @Produces(MediaType.APPLICATION_JSON)

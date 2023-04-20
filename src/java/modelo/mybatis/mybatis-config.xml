@@ -26,5 +26,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
       <mapper resource="modelo/mybatis/mappers/UsuarioMapper.xml"/>
       <mapper resource="modelo/mybatis/mappers/RazaMapper.xml"/>
       <mapper resource="modelo/mybatis/mappers/CatalogoConceptoMapper.xml"/>
+      <!-- <mapper resource="modelo/mybatis/mappers/IngresoMapper.xml"/> -->
     </mappers>
 </configuration>
