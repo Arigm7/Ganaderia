@@ -19,6 +19,7 @@ public class ApplicationConfig extends Application {
         resources.add(servicios.CatalogoConceptoWS.class);
         resources.add(servicios.IngresoWS.class);
         resources.add(servicios.RazaWS.class);
+        resources.add(servicios.RolWS.class);
         resources.add(servicios.SesionWS.class);
         resources.add(servicios.UsuarioWS.class);
        
