@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Rancho">
+    <select id="getAllRancho" resultType="modelo.pojos.Rancho" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllRancho()}
+    </select>
+    
+    <insert id="registrarRancho" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_registrarRancho(
+        #{nombre,jdbcType=VARCHAR,mode=IN},
+        #{colonia,jdbcType=VARCHAR,mode=IN},
+        #{calle,jdbcType=VARCHAR,mode=IN},
+        #{numExt,jdbcType=INTEGER,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
+    </insert>
+    
+    <update id="actualizarRancho" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarRancho(
+        #{idRancho,jdbcType=INTEGER,mode=IN},
+        #{nombre,jdbcType=VARCHAR,mode=IN},
+        #{colonia,jdbcType=VARCHAR,mode=IN},
+        #{calle,jdbcType=VARCHAR,mode=IN},
+        #{numExt,jdbcType=INTEGER,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="eliminarRancho" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_eliminarRancho(
+        #{idRancho,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarEstatusRancho(
+        #{idRancho,jdbcType=INTEGER,mode=IN})}
+    </update>
+</mapper>

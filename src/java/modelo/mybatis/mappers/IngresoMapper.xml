@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_registrarIngreso(
         #{cantidad,jdbcType=INTEGER,mode=IN},
         #{observaciones,jdbcType=VARCHAR,mode=IN},
-        #{fechaCreacion,jdbcType=DATETIME,mode=IN},
+        #{fechaCreacion,jdbcType=DATE,mode=IN},
         #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN})}
     </insert>
     
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{idIngreso,jdbcType=INTEGER,mode=IN},
         #{cantidad,jdbcType=INTEGER,mode=IN},
         #{observaciones,jdbcType=VARCHAR,mode=IN},
-        #{fechaModificacion,jdbcType=DATETIME,mode=IN},
+        #{fechaModificacion,jdbcType=DATE,mode=IN},
         #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN})}
     </update>
     

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Egreso">
+    <select id="getAllEgreso" resultType="modelo.pojos.Egreso" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllEgreso()}
+    </select>
+    
+    <insert id="registrarEgreso" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_registrarEgreso(
+        #{motivo,jdbcType=VARCHAR,mode=IN},
+        #{observaciones,jdbcType=VARCHAR,mode=IN},
+        #{fechaCreacion,jdbcType=DATE,mode=IN},
+        #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN})}
+    </insert>
+    
+    <update id="actualizarEgreso" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarEgreso(
+        #{idEgreso,jdbcType=INTEGER,mode=IN},
+        #{motivo,jdbcType=VARCHAR,mode=IN},
+        #{observaciones,jdbcType=VARCHAR,mode=IN},
+        #{fechaModificacion,jdbcType=DATE,mode=IN},
+        #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+</mapper>

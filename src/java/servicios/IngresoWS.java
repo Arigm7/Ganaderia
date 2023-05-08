@@ -1,7 +1,10 @@
 
 package servicios;
 
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +22,8 @@ import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.Ingreso;
 import modelo.pojos.Respuesta;
 import org.apache.ibatis.session.SqlSession;
+
+
 
 
 @Path("ingreso")
@@ -58,17 +63,20 @@ public class IngresoWS {
     public Respuesta registrarIngreso(
             @FormParam("cantidad") Integer cantidad,
             @FormParam("observaciones") String observaciones,
-            @FormParam("fechaCreacion") Date fechaCreacion,  //date importado como sql
+            @FormParam("fechaCreacion") String fechaCreacion,  
             @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto){
         
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
+        //FECHA ACTUAL
+        LocalDateTime now = LocalDateTime.now();    
+        String currentTime = now.toString();
         
         try{
             HashMap<String,Object> param = new HashMap<String,Object>();
             param.put("cantidad", cantidad);
             param.put("observaciones", observaciones);
-            param.put("fechaCreacion", fechaCreacion);
+            param.put("fechaCreacion", currentTime);
             param.put("idCatalogoConcepto", idCatalogoConcepto);
             
             conn.insert("Ingreso.registrarIngreso",param);
@@ -94,18 +102,22 @@ public class IngresoWS {
             @FormParam("idIngreso") Integer idIngreso,
             @FormParam("cantidad") Integer cantidad,
             @FormParam("observaciones") String observaciones,
-            @FormParam("fechaModificacion") Date fechaModificacion,  //date importado como sql
+            @FormParam("fechaModificacion") String fechaModificacion,  
             @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto){
         
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
+        
+                //FECHA ACTUAL
+        LocalDateTime now = LocalDateTime.now();    
+        String currentTime = now.toString();
         
         try{
             HashMap<String,Object> param = new HashMap<String,Object>();
             param.put("idIngreso", idIngreso);
             param.put("cantidad", cantidad);
             param.put("observaciones", observaciones);
-            param.put("fechaModificacion", fechaModificacion);
+            param.put("fechaModificacion", currentTime);
             param.put("idCatalogoConcepto", idCatalogoConcepto);
             
             conn.update("Ingreso.actualizarIngreso",param);
