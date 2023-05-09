@@ -18,10 +18,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.Egreso;
-import modelo.pojos.Ingreso;
 import modelo.pojos.Respuesta;
 import org.apache.ibatis.session.SqlSession;
 
@@ -60,6 +60,25 @@ public class EgresoWS {
         }
         return list;
     }
+    
+    @GET
+    @Path("getAllEgresoHistorial")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Egreso> getAllEgresoHistorial() {
+        List<Egreso> list = new ArrayList<Egreso>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list = conn.selectList("Egreso.getAllEgreso_historial");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 
     @POST
     @Path("registrarEgreso")
@@ -69,7 +88,8 @@ public class EgresoWS {
             @FormParam("observaciones") String observaciones,
             @FormParam("fechaCreacion") String fechaCreacion,
             @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto,
-            @FormParam("idRancho") Integer idRancho) {
+            @FormParam("idRancho") Integer idRancho,
+            @FormParam("idUsuario") Integer idUsuario) {
 
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -84,6 +104,7 @@ public class EgresoWS {
             param.put("fechaCreacion", currentTime);
             param.put("idCatalogoConcepto", idCatalogoConcepto);
             param.put("idRancho", idRancho);
+            param.put("idUsuario", idUsuario);
 
             conn.insert("Egreso.registrarEgreso", param);
             conn.commit();
@@ -109,7 +130,8 @@ public class EgresoWS {
             @FormParam("observaciones") String observaciones,
             @FormParam("fechaModificacion") String fechaModificacion,
             @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto,
-            @FormParam("idRancho") Integer idRancho) {
+            @FormParam("idRancho") Integer idRancho,
+            @FormParam("idUsuario") Integer idUsuario) {
 
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -126,6 +148,7 @@ public class EgresoWS {
             param.put("fechaModificacion", currentTime);
             param.put("idCatalogoConcepto", idCatalogoConcepto);
             param.put("idRancho", idRancho);
+            param.put("idUsuario", idUsuario);
 
             conn.update("Egreso.actualizarEgreso", param);
             conn.commit();
@@ -140,5 +163,20 @@ public class EgresoWS {
             conn.close();
         }
         return res;
+    }
+    
+    @GET
+    @Path("getEgresoById/{rancho}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Egreso> getEgresoById(@PathParam("rancho") String rancho){
+        SqlSession conn = MyBatisUtil.getSession();
+        try{
+            return conn.selectList("Egreso.getEgresoById", rancho);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            conn.close();
+        }
+        return null;
     }
 }

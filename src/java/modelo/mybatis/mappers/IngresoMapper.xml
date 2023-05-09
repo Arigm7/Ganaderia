@@ -8,13 +8,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_getAllIngreso()}
     </select>
     
+    <select id="getAllIngreso_historial" resultType="modelo.pojos.Ingreso" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllIngreso_historial()}
+    </select>
+    
+    <select id="getIngresoById" resultType="modelo.pojos.Ingreso" statementType="CALLABLE">
+        {CALL ganaderia.sp_getIngresoById(
+        #{rancho,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
     <insert id="registrarIngreso" parameterType="map" statementType="CALLABLE">
         {CALL ganaderia.sp_registrarIngreso(
         #{cantidad,jdbcType=INTEGER,mode=IN},
         #{observaciones,jdbcType=VARCHAR,mode=IN},
         #{fechaCreacion,jdbcType=DATE,mode=IN},
         #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN},
-        #{idRancho,jdbcType=INTEGER,mode=IN})}
+        #{idRancho,jdbcType=INTEGER,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
     </insert>
     
     <update id="actualizarIngreso" parameterType="map" statementType="CALLABLE">
@@ -24,7 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{observaciones,jdbcType=VARCHAR,mode=IN},
         #{fechaModificacion,jdbcType=DATE,mode=IN},
         #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN},
-        #{idRancho,jdbcType=INTEGER,mode=IN})}
+        #{idRancho,jdbcType=INTEGER,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
     </update>
     
 </mapper>
