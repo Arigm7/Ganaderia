@@ -68,7 +68,8 @@ public class EgresoWS {
             @FormParam("motivo") String motivo,
             @FormParam("observaciones") String observaciones,
             @FormParam("fechaCreacion") String fechaCreacion,
-            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto) {
+            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto,
+            @FormParam("idRancho") Integer idRancho) {
 
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -82,6 +83,7 @@ public class EgresoWS {
             param.put("observaciones", observaciones);
             param.put("fechaCreacion", currentTime);
             param.put("idCatalogoConcepto", idCatalogoConcepto);
+            param.put("idRancho", idRancho);
 
             conn.insert("Egreso.registrarEgreso", param);
             conn.commit();
@@ -106,7 +108,8 @@ public class EgresoWS {
             @FormParam("motivo") String motivo,
             @FormParam("observaciones") String observaciones,
             @FormParam("fechaModificacion") String fechaModificacion,
-            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto) {
+            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto,
+            @FormParam("idRancho") Integer idRancho) {
 
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -122,6 +125,7 @@ public class EgresoWS {
             param.put("observaciones", observaciones);
             param.put("fechaModificacion", currentTime);
             param.put("idCatalogoConcepto", idCatalogoConcepto);
+            param.put("idRancho", idRancho);
 
             conn.update("Egreso.actualizarEgreso", param);
             conn.commit();

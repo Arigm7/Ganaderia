@@ -64,7 +64,8 @@ public class IngresoWS {
             @FormParam("cantidad") Integer cantidad,
             @FormParam("observaciones") String observaciones,
             @FormParam("fechaCreacion") String fechaCreacion,  
-            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto){
+            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto,
+            @FormParam("idRancho") Integer idRancho){
         
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -78,6 +79,7 @@ public class IngresoWS {
             param.put("observaciones", observaciones);
             param.put("fechaCreacion", currentTime);
             param.put("idCatalogoConcepto", idCatalogoConcepto);
+             param.put("idRancho", idRancho);
             
             conn.insert("Ingreso.registrarIngreso",param);
             conn.commit();
@@ -103,7 +105,8 @@ public class IngresoWS {
             @FormParam("cantidad") Integer cantidad,
             @FormParam("observaciones") String observaciones,
             @FormParam("fechaModificacion") String fechaModificacion,  
-            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto){
+            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto,
+            @FormParam("idRancho") Integer idRancho){
         
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -119,6 +122,7 @@ public class IngresoWS {
             param.put("observaciones", observaciones);
             param.put("fechaModificacion", currentTime);
             param.put("idCatalogoConcepto", idCatalogoConcepto);
+             param.put("idRancho", idRancho);
             
             conn.update("Ingreso.actualizarIngreso",param);
             conn.commit();
