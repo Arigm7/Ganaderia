@@ -8,6 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_getAllRol()}
     </select>
     
+    <select id="getRolById" resultType="modelo.pojos.Rol" statementType="CALLABLE">
+        {CALL ganaderia.sp_getRolById(
+        #{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    <select id="getAllRolActivo" resultType="modelo.pojos.Rol" statementType="CALLABLE">
+        {CALL ganaderia.sp_getRol_usuario()}
+    </select>
     <insert id="registrarRol" parameterType="map" statementType="CALLABLE">
         {CALL ganaderia.sp_registrarRol(
         #{nombre,jdbcType=VARCHAR,mode=IN},

@@ -9,7 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="getAllUsersActivo" resultType="modelo.pojos.Usuario" statementType="CALLABLE">
-        {CALL ganaderia.sp_getAllUsuario_activo()}
+        {CALL ganaderia.sp_getUsuario_rancho()}
+    </select>
+    
+    <select id="usuarioId" resultType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_usuarioId(
+        #{usuario,jdbcType=VARCHAR,mode=IN})}
     </select>
     
     <insert id="registrarUsuario" parameterType="map" statementType="CALLABLE">
@@ -43,5 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_actualizarEstatusUsuario(
         #{idUsuario,jdbcType=INTEGER,mode=IN})}
     </update>
+    
+    <select id="getUsuarioById" resultType="modelo.pojos.Usuario" statementType="CALLABLE">
+        {CALL ganaderia.sp_getUsuarioById(
+        #{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
     
 </mapper>

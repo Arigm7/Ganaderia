@@ -4,6 +4,7 @@ package servicios;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -13,6 +14,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.Respuesta;
@@ -56,20 +58,20 @@ public class UsuarioWS {
     @GET
     @Path("getAllUsersActivo")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Usuario>getAllUsersActivo(){
-    List<Usuario> list = new ArrayList<Usuario>();
-    SqlSession conn=null;
-    try{
-        conn=MyBatisUtil.getSession();
-        list=conn.selectList("Usuario.getAllUsersActivo");
-    }catch(Exception ex){
-        ex.printStackTrace();
-    }finally{
-        if(conn!=null){
-            conn.close();
+    public List<Usuario> getAllUsersActivo() {
+        List<Usuario> list = new ArrayList<Usuario>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list = conn.selectList("Usuario.getAllUsersActivo");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
-    }
-    return list;
+        return list;
     }
     
     
@@ -208,6 +210,51 @@ public class UsuarioWS {
             res.setError(true);
             res.setMensaje("No se pudo actualizar el estado");
         }finally{
+            conn.close();
+        }
+        return res;
+    }
+    
+    @GET
+    @Path("getUsuarioById/{nombre}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Usuario> getUsuarioById(@PathParam("nombre") String nombre) {
+        SqlSession conn = MyBatisUtil.getSession();
+        try {
+            return conn.selectList("Usuario.getUsuarioById", nombre);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        return null;
+    }
+    
+    @POST
+    @Path("usuarioId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta usuarioById(@FormParam("usuario") String usuario) {
+        Respuesta res = new Respuesta();
+        SqlSession conn = MyBatisUtil.getSession();
+        long num=0;
+        try {
+            
+            HashMap<String,Object> param = new HashMap<String,Object>();
+            param.put("usuario", usuario);
+           
+            Map<String, Object> result = conn.selectOne("Usuario.usuarioId", param);
+            conn.commit();
+            num = (Long) result.get("RESULT");
+
+            res.setError(false);
+           
+            res.setMensaje(Long.toString(num));
+         
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            res.setError(true);
+            res.setMensaje("Error al consultar");
+        } finally {
             conn.close();
         }
         return res;

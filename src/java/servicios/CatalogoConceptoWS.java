@@ -13,6 +13,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.CatalogoConcepto;
@@ -209,14 +210,14 @@ public class CatalogoConceptoWS {
     @Path("actualizarEstatus")
     @Produces(MediaType.APPLICATION_JSON)
     public Respuesta actualizarEstatusCatalogo(
-            @FormParam("idCatalogoConceptos") Integer idCatalogoConceptos){
+            @FormParam("idCatalogoConcepto") Integer idCatalogoConcepto){
         
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
         
         try{
             HashMap<String,Object> param = new HashMap<String,Object>();
-            param.put("idCatalogoConceptos", idCatalogoConceptos);
+            param.put("idCatalogoConcepto", idCatalogoConcepto);
             
             conn.update("Catalogo.actualizarEstatus",param);
             conn.commit();
@@ -231,6 +232,21 @@ public class CatalogoConceptoWS {
             conn.close();
         }
         return res;
+    }
+    
+    @GET
+    @Path("getCatalogoById/{concepto}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CatalogoConcepto> getCatalogoById(@PathParam("concepto") String concepto) {
+        SqlSession conn = MyBatisUtil.getSession();
+        try {
+            return conn.selectList("Catalogo.getCatalogoById", concepto);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        return null;
     }
     
 }

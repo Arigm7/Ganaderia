@@ -12,6 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_getAllRaza_activo()}
     </select>
     
+    <select id="getRazaById" resultType="modelo.pojos.Raza" statementType="CALLABLE">
+        {CALL ganaderia.sp_getRazaById(
+        #{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    <select id="razaId" resultType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_RazaId(
+        #{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
     <insert id="registrarRaza" parameterType="map" statementType="CALLABLE">
         {CALL ganaderia.sp_registrarRaza(#{nombre,jdbcType=VARCHAR,mode=IN})}
     </insert>

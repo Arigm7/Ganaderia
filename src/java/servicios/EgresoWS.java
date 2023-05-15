@@ -79,6 +79,21 @@ public class EgresoWS {
         }
         return list;
     }
+    
+    @GET
+    @Path("getHistorialById/{rancho}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Egreso> gethistoriaById(@PathParam("rancho") String rancho){
+        SqlSession conn = MyBatisUtil.getSession();
+        try{
+            return conn.selectList("Egreso.getHistorialById", rancho);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            conn.close();
+        }
+        return null;
+    }
 
     @POST
     @Path("registrarEgreso")
@@ -178,5 +193,61 @@ public class EgresoWS {
             conn.close();
         }
         return null;
+    }
+    
+    @POST
+    @Path("eliminarEgreso")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta eliminarEgreso(
+            @FormParam("idEgreso") Integer idEgreso){
+        
+        Respuesta res = new Respuesta();
+        SqlSession conn = MyBatisUtil.getSession();
+        
+        try{
+            HashMap<String,Object> param = new HashMap<String,Object>();
+            param.put("idEgreso", idEgreso);
+            
+            conn.update("Egreso.eliminarEgreso",param);
+            conn.commit();
+            res.setError(false);
+            res.setMensaje("Egreso eliminada correctamente...");
+         
+        }catch(Exception ex){
+            ex.printStackTrace();
+            res.setError(true);
+            res.setMensaje("No se pudo eliminar el egreso");
+        }finally{
+            conn.close();
+        }
+        return res;
+    }
+    
+    @POST
+    @Path("actualizarEstatus")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta actualizarEstatusEgreso(
+            @FormParam("idEgreso") Integer idEgreso){
+        
+        Respuesta res = new Respuesta();
+        SqlSession conn = MyBatisUtil.getSession();
+        
+        try{
+            HashMap<String,Object> param = new HashMap<String,Object>();
+            param.put("idEgreso", idEgreso);
+            
+            conn.update("Egreso.actualizarEstatus",param);
+            conn.commit();
+            res.setError(false);
+            res.setMensaje("Estatus actualizado correctamente...");
+         
+        }catch(Exception ex){
+            ex.printStackTrace();
+            res.setError(true);
+            res.setMensaje("No se pudo actualizar el estado");
+        }finally{
+            conn.close();
+        }
+        return res;
     }
 }

@@ -8,6 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_getAllCatalogoConcepto()}
     </select>
     
+    <select id="getCatalogoById" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
+        {CALL ganaderia.sp_getCatalogoById(
+        #{concepto,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
     <select id="getAllCatalogoActivo" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
         {CALL ganaderia.sp_getAllCatalogo_activo()}
     </select>
@@ -40,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
         {CALL ganaderia.sp_actualizarEstatusCatalogo(
-        #{idCatalogoConceptos,jdbcType=INTEGER,mode=IN})}
+        #{idCatalogoConcepto,jdbcType=INTEGER,mode=IN})}
     </update>
 </mapper>
 

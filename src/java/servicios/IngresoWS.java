@@ -77,6 +77,21 @@ public class IngresoWS {
         return list;
     }
     
+    @GET
+    @Path("getHistorialById/{rancho}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Ingreso> gethistoriaById(@PathParam("rancho") String rancho){
+        SqlSession conn = MyBatisUtil.getSession();
+        try{
+            return conn.selectList("Ingreso.getIngresoById", rancho);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            conn.close();
+        }
+        return null;
+    }
+    
     @POST
     @Path("registrarIngreso")
     @Produces(MediaType.APPLICATION_JSON)
@@ -163,6 +178,7 @@ public class IngresoWS {
         return res;
     }
     
+ 
     @GET
     @Path("getIngresoById/{rancho}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -176,5 +192,61 @@ public class IngresoWS {
             conn.close();
         }
         return null;
+    }
+
+    @POST
+    @Path("eliminarIngreso")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta eliminarIngreso(
+            @FormParam("idIngreso") Integer idIngreso) {
+
+        Respuesta res = new Respuesta();
+        SqlSession conn = MyBatisUtil.getSession();
+
+        try {
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("idIngreso", idIngreso);
+
+            conn.update("Ingreso.eliminarIngreso", param);
+            conn.commit();
+            res.setError(false);
+            res.setMensaje("Ingreso eliminada correctamente...");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            res.setError(true);
+            res.setMensaje("No se pudo eliminar el ingreso");
+        } finally {
+            conn.close();
+        }
+        return res;
+    }
+    
+    @POST
+    @Path("actualizarEstatus")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta actualizarEstatusIngreso(
+            @FormParam("idIngreso") Integer idIngreso){
+        
+        Respuesta res = new Respuesta();
+        SqlSession conn = MyBatisUtil.getSession();
+        
+        try{
+            HashMap<String,Object> param = new HashMap<String,Object>();
+            param.put("idIngreso", idIngreso);
+            
+            conn.update("Ingreso.actualizarEstatus",param);
+            conn.commit();
+            res.setError(false);
+            res.setMensaje("Estatus actualizado correctamente...");
+         
+        }catch(Exception ex){
+            ex.printStackTrace();
+            res.setError(true);
+            res.setMensaje("No se pudo actualizar el estado");
+        }finally{
+            conn.close();
+        }
+        return res;
     }
 }

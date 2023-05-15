@@ -7,13 +7,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getAllIngreso" resultType="modelo.pojos.Ingreso" statementType="CALLABLE">
         {CALL ganaderia.sp_getAllIngreso()}
     </select>
-    
+
     <select id="getAllIngreso_historial" resultType="modelo.pojos.Ingreso" statementType="CALLABLE">
         {CALL ganaderia.sp_getAllIngreso_historial()}
     </select>
     
     <select id="getIngresoById" resultType="modelo.pojos.Ingreso" statementType="CALLABLE">
         {CALL ganaderia.sp_getIngresoById(
+        #{rancho,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    <select id="getHistorialById" resultType="modelo.pojos.Ingreso" statementType="CALLABLE">
+        {CALL ganaderia.sp_getHistorial_ingresoById(
         #{rancho,jdbcType=VARCHAR,mode=IN})}
     </select>
     
@@ -38,4 +43,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{idUsuario,jdbcType=INTEGER,mode=IN})}
     </update>
     
+    <update id="eliminarIngreso" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_eliminarIngreso(
+        #{idIngreso,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarEstatusIngreso(
+        #{idIngreso,jdbcType=INTEGER,mode=IN})}
+    </update>
 </mapper>

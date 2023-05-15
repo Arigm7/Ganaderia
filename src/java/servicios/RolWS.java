@@ -17,10 +17,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.Respuesta;
 import modelo.pojos.Rol;
+import modelo.pojos.Usuario;
 import org.apache.ibatis.session.SqlSession;
 
 @Path("rol")
@@ -48,6 +50,25 @@ public class RolWS {
             ex.printStackTrace();
         }finally{
             if(conn!=null){
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    @GET
+    @Path("getAllRolActivo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Rol> getAllUsersActivo() {
+        List<Rol> list = new ArrayList<Rol>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list = conn.selectList("Rol.getAllRolActivo");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
                 conn.close();
             }
         }
@@ -171,5 +192,20 @@ public class RolWS {
             conn.close();
         }
         return res;
+    }
+    
+    @GET
+    @Path("getRolById/{nombre}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Rol> getRolById(@PathParam("nombre") String nombre) {
+        SqlSession conn = MyBatisUtil.getSession();
+        try {
+            return conn.selectList("Rol.getRolById", nombre);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        return null;
     }
 }

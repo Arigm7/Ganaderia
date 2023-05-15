@@ -4,6 +4,7 @@ package servicios;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -13,6 +14,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.Raza;
@@ -186,6 +188,47 @@ public class RazaWS {
             res.setError(true);
             res.setMensaje("No se pudo actualizar el estado");
         }finally{
+            conn.close();
+        }
+        return res;
+    }
+    
+    @GET
+    @Path("getRazaById/{nombre}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Raza> getRazaById(@PathParam("nombre") String nombre) {
+        SqlSession conn = MyBatisUtil.getSession();
+        try {
+            return conn.selectList("Raza.getRazaById", nombre);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        return null;
+    }
+    
+    @POST
+    @Path("razaId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta razaById(@FormParam("nombre") String nombre) {
+        Respuesta res = new Respuesta();
+        SqlSession conn = MyBatisUtil.getSession();
+        long num=0;
+        try {
+            Map<String, Object> result = conn.selectOne("Raza.razaId", nombre);
+            conn.commit();
+            num = (Long) result.get("RESULT");
+
+            res.setError(false);
+           
+            res.setMensaje(Long.toString(num));
+         
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            res.setError(true);
+            res.setMensaje("Error al consultar");
+        } finally {
             conn.close();
         }
         return res;
