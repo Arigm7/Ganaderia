@@ -4,6 +4,7 @@ package servicios;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -51,28 +52,7 @@ public class CatalogoConceptoWS {
             }
         }
         return list;
-    }
-    
-    
-    @GET
-    @Path("getAllCatalogoActivo")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<CatalogoConcepto>getAllCatalogoActivo(){
-        List<CatalogoConcepto> list = new ArrayList<CatalogoConcepto>();
-        SqlSession conn=null;
-        try{
-            conn=MyBatisUtil.getSession();
-            list=conn.selectList("Catalogo.getAllCatalogoActivo");
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }finally{
-            if(conn!=null){
-                conn.close();
-            }
-        }
-        return list;
-    }
-    
+    }   
     
     @GET
     @Path("getAllCatalogoIngreso")
@@ -82,7 +62,7 @@ public class CatalogoConceptoWS {
         SqlSession conn=null;
         try{
             conn=MyBatisUtil.getSession();
-            list=conn.selectList("Catalogo.getAllCatalogoIngreso");
+            list=conn.selectList("Catalogo.getAllIngresoActivo");
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
@@ -102,7 +82,7 @@ public class CatalogoConceptoWS {
         SqlSession conn=null;
         try{
             conn=MyBatisUtil.getSession();
-            list=conn.selectList("Catalogo.getAllCatalogoEgreso");
+            list=conn.selectList("Catalogo.getAllEgresoActivo");
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
@@ -249,4 +229,34 @@ public class CatalogoConceptoWS {
         return null;
     }
     
+    @POST
+    @Path("catalogoId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta catalogoById(@FormParam("concepto") String concepto, @FormParam("catalogo") String catalogo) {
+        Respuesta res = new Respuesta();
+        SqlSession conn = MyBatisUtil.getSession();
+        long num = 0;
+        try {
+
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("concepto", concepto);
+            param.put("catalogo", catalogo);
+
+            Map<String, Object> result = conn.selectOne("Catalogo.catalogoId", param);
+            conn.commit();
+            num = (Long) result.get("RESULT");
+
+            res.setError(false);
+
+            res.setMensaje(Long.toString(num));
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            res.setError(true);
+            res.setMensaje("Error al consultar");
+        } finally {
+            conn.close();
+        }
+        return res;
+    }
 }

@@ -8,6 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_getAllRancho()}
     </select>
     
+    <select id="getAllRanchoActivo" resultType="modelo.pojos.Rancho" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllRancho_activo()}
+    </select>
+    
     <select id="getRanchoById" resultType="modelo.pojos.Rancho" statementType="CALLABLE">
         {CALL ganaderia.sp_getRanchoById(
         #{nombre,jdbcType=VARCHAR,mode=IN})}

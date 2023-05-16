@@ -52,6 +52,24 @@ public class RanchoWS {
         return list;
     }
   
+    @GET
+    @Path("getAllRanchoActivo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Rancho> getAllRanchoActivo() {
+        List<Rancho> list = new ArrayList<Rancho>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list = conn.selectList("Rancho.getAllRanchoActivo");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
     
     @POST
     @Path("registrarRancho")

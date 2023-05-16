@@ -8,6 +8,7 @@ package servicios;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -78,7 +79,7 @@ public class RolWS {
     @POST
     @Path("registrarRol")
     @Produces(MediaType.APPLICATION_JSON)
-    public Respuesta registrarRol(@FormParam("nombre") String nombre, @FormParam("estatus") String estatus){
+    public Respuesta registrarRol(@FormParam("nombre") String nombre){
         
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -87,7 +88,7 @@ public class RolWS {
             HashMap<String,Object> param = new HashMap<String,Object>();
             
             param.put("nombre", nombre);
-            param.put("estatus", estatus);
+            
             
             conn.insert("Rol.registrarRol",param);
             conn.commit();
@@ -207,5 +208,35 @@ public class RolWS {
             conn.close();
         }
         return null;
+    }
+
+    @POST
+    @Path("rolId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Respuesta rolById(@FormParam("nombre") String nombre) {
+        Respuesta res = new Respuesta();
+        SqlSession conn = MyBatisUtil.getSession();
+        long num = 0;
+        try {
+
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("nombre", nombre);
+
+            Map<String, Object> result = conn.selectOne("Rol.rolId", param);
+            conn.commit();
+            num = (Long) result.get("RESULT");
+
+            res.setError(false);
+
+            res.setMensaje(Long.toString(num));
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            res.setError(true);
+            res.setMensaje("Error al consultar");
+        } finally {
+            conn.close();
+        }
+        return res;
     }
 }

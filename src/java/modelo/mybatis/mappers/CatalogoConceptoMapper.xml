@@ -13,16 +13,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{concepto,jdbcType=VARCHAR,mode=IN})}
     </select>
     
-    <select id="getAllCatalogoActivo" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
-        {CALL ganaderia.sp_getAllCatalogo_activo()}
+    <select id="getAllIngresoActivo" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllIngreso_activo()}
     </select>
     
-    <select id="getAllCatalogoIngreso" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
-        {CALL ganaderia.sp_getAllCatalogo_ingreso()}
+    <select id="getAllEgresoActivo" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllEgreso_activo()}
     </select>
     
-    <select id="getAllCatalogoEgreso" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
-        {CALL ganaderia.sp_getAllCatalogo_egreso()}
+    <select id="catalogoId" resultType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_catalogoId(
+        #{concepto,jdbcType=VARCHAR,mode=IN},
+        #{catalogo,jdbcType=VARCHAR,mode=IN})}
     </select>
     
     <insert id="registrarCatalogo" parameterType="map" statementType="CALLABLE">
