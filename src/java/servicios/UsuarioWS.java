@@ -38,20 +38,20 @@ public class UsuarioWS {
     @GET
     @Path("getAllUsers")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Usuario>getAllUsers(){
-    List<Usuario> list = new ArrayList<Usuario>();
-    SqlSession conn=null;
-    try{
-        conn=MyBatisUtil.getSession();
-        list=conn.selectList("Usuario.getAllUsers");
-    }catch(Exception ex){
-        ex.printStackTrace();
-    }finally{
-        if(conn!=null){
-            conn.close();
+    public List<Usuario> getAllUsers() {
+        List<Usuario> list = new ArrayList<Usuario>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list = conn.selectList("Usuario.getAllUsers");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
-    }
-    return list;
+        return list;
     }
     
     

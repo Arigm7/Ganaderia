@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Hato">
+    <select id="getAllHato" resultType="modelo.pojos.Hato" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllHato()}
+    </select>
+    
+    <select id="getHatoById" resultType="modelo.pojos.Hato" statementType="CALLABLE">
+        {CALL ganaderia.sp_getHatoById(
+        #{numArete,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    <insert id="registrarHato" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_registrarHato(
+        #{numArete,jdbcType=VARCHAR,mode=IN},
+        #{sexo,jdbcType=VARCHAR,mode=IN},
+        #{descripcion,jdbcType=VARCHAR,mode=IN},
+        #{imagen1,jdbcType=BIT,mode=IN},
+        #{imagen2,jdbcType=BIT,mode=IN},
+        #{tipoGanado,jdbcType=VARCHAR,mode=IN},
+        #{diaDeAlta,jdbcType=DATE,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN},
+        #{idRaza,jdbcType=INTEGER,mode=IN},
+        #{idLote,jdbcType=INTEGER,mode=IN},
+        #{idRancho,jdbcType=INTEGER,mode=IN})}
+    </insert>
+    
+    <update id="actualizarHato" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarHato(
+        #{numArete,jdbcType=VARCHAR,mode=IN},
+        #{sexo,jdbcType=VARCHAR,mode=IN},
+        #{descripcion,jdbcType=VARCHAR,mode=IN},
+        #{imagen1,jdbcType=BIT,mode=IN},
+        #{imagen2,jdbcType=BIT,mode=IN},
+        #{tipoGanado,jdbcType=VARCHAR,mode=IN},
+        #{diaDeModificacion,jdbcType=DATE,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN},
+        #{idRaza,jdbcType=INTEGER,mode=IN},
+        #{idLote,jdbcType=INTEGER,mode=IN},
+        #{idRancho,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="eliminarHato" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_eliminarHato(
+        #{numArete,jdbcType=VARCHAR,mode=IN},
+        #{diaDeBaja,jdbcType=DATE,mode=IN},
+        #{motivoDeBaja,jdbcType=VARCHAR,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarEstatusHato(
+        #{numArete,jdbcType=VARCHAR,mode=IN})}
+    </update>
+    
+</mapper>

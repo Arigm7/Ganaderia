@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Traspaso">
+    <select id="getAllTraspaso" resultType="modelo.pojos.Traspaso" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllTraspaso()}
+    </select>
+    
+    <select id="getTraspasoById" resultType="modelo.pojos.Traspaso" statementType="CALLABLE">
+        {CALL ganaderia.sp_getTraspasoById(
+        #{nombreLote,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    <insert id="registrarTraspaso" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_registrarTraspaso(
+        #{descripcion,jdbcType=VARCHAR,mode=IN},
+        #{motivo,jdbcType=VARCHAR,mode=IN},
+        #{fechaCreacion,jdbcType=DATE,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN},
+        #{idLote,jdbcType=INTEGER,mode=IN})}
+    </insert>
+    
+    <update id="actualizarTraspaso" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarTraspaso(
+        #{idTraspaso,jdbcType=INTEGER,mode=IN},
+        #{descripcion,jdbcType=VARCHAR,mode=IN},
+        #{motivo,jdbcType=VARCHAR,mode=IN},
+        #{fechaModificacion,jdbcType=DATE,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN},
+        #{idLote,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="eliminarTraspaso" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_eliminarTraspaso(
+        #{idTraspaso,jdbcType=INTEGER,mode=IN},
+        #{fechaCancelacion,jdbcType=DATE,mode=IN},
+        #{motivoDeCancelacion,jdbcType=VARCHAR,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarEstatusTraspaso(
+        #{idTraspaso,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+</mapper>

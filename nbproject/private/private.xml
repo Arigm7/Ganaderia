@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alex/Documents/NetBeansProjects/GanaderiaWS/src/java/servicios/RanchoWS.java</file>
-            <file>file:/C:/Users/Alex/Documents/NetBeansProjects/GanaderiaWS/src/java/modelo/mybatis/mappers/RanchoMapper.xml</file>
-            <file>file:/C:/Users/Alex/Documents/NetBeansProjects/GanaderiaWS/src/java/modelo/mybatis/mappers/CatalogoConceptoMapper.xml</file>
-            <file>file:/C:/Users/Alex/Documents/NetBeansProjects/GanaderiaWS/src/java/servicios/CatalogoConceptoWS.java</file>
+            <file>file:/C:/Users/Alex/Documents/NetBeansProjects/GanaderiaWS/src/java/servicios/LoteWS.java</file>
+            <file>file:/C:/Users/Alex/Documents/NetBeansProjects/GanaderiaWS/src/java/modelo/mybatis/mappers/LoteMapper.xml</file>
         </group>
     </open-files>
 </project-private>

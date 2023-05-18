@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Veterinario">
+    <select id="getAllVeterinario" resultType="modelo.pojos.Veterinario" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllVeterinario()}
+    </select>
+    
+    <select id="getVeterinarioById" resultType="modelo.pojos.Veterinario" statementType="CALLABLE">
+        {CALL ganaderia.sp_getVeterinarioById(
+        #{numArete,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    <insert id="registrarVeterinario" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_registrarVeterinario(
+        #{nombreVisita,jdbcType=VARCHAR,mode=IN},
+        #{fechaVisita,jdbcType=DATE,mode=IN},
+        #{motivo,jdbcType=VARCHAR,mode=IN},
+        #{observaciones,jdbcType=VARCHAR,mode=IN},
+        #{numArete,jdbcType=VARCHAR,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
+    </insert>
+    
+    <update id="actualizarVeterinario" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarVeterinario(
+        #{idVisita,jdbcType=INTEGER,mode=IN},
+        #{nombreVisita,jdbcType=VARCHAR,mode=IN},
+        #{fechaVisita,jdbcType=DATE,mode=IN},
+        #{motivo,jdbcType=VARCHAR,mode=IN},
+        #{observaciones,jdbcType=VARCHAR,mode=IN},
+        #{numArete,jdbcType=VARCHAR,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="eliminarVeterinario" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_eliminarVeterinario(
+        #{idVisita,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL ganaderia.sp_actualizarEstatusVeterinario(
+        #{idVisita,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+</mapper>
