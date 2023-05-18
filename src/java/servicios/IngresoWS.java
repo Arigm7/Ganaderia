@@ -83,7 +83,7 @@ public class IngresoWS {
     public List<Ingreso> gethistoriaById(@PathParam("rancho") String rancho){
         SqlSession conn = MyBatisUtil.getSession();
         try{
-            return conn.selectList("Ingreso.getIngresoById", rancho);
+            return conn.selectList("Ingreso.getHistorialById", rancho);
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{

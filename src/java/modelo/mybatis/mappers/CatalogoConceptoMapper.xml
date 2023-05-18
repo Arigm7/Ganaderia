@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="getCatalogoById" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">
         {CALL ganaderia.sp_getCatalogoById(
-        #{concepto,jdbcType=VARCHAR,mode=IN})}
+        #{catalogo,jdbcType=VARCHAR,mode=IN})}
     </select>
     
     <select id="getAllIngresoActivo" resultType="modelo.pojos.CatalogoConcepto" statementType="CALLABLE">

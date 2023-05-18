@@ -12,12 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_getAllEgreso_historial()}
     </select>
     
-    <select id="getHistorialById" resultType="modelo.pojos.Ingreso" statementType="CALLABLE">
+    <select id="getHistorialById" resultType="modelo.pojos.Egreso" statementType="CALLABLE">
         {CALL ganaderia.sp_getHistorial_egresoById(
         #{rancho,jdbcType=VARCHAR,mode=IN})}
     </select>
     
-    <select id="getEgresoById" resultType="modelo.pojos.Ingreso" statementType="CALLABLE">
+    <select id="getEgresoById" resultType="modelo.pojos.Egreso" statementType="CALLABLE">
         {CALL ganaderia.sp_getEgresoById(
         #{rancho,jdbcType=VARCHAR,mode=IN})}
     </select>

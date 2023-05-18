@@ -215,12 +215,12 @@ public class CatalogoConceptoWS {
     }
     
     @GET
-    @Path("getCatalogoById/{concepto}")
+    @Path("getCatalogoById/{catalogo}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CatalogoConcepto> getCatalogoById(@PathParam("concepto") String concepto) {
+    public List<CatalogoConcepto> getCatalogoById(@PathParam("catalogo") String catalogo) {
         SqlSession conn = MyBatisUtil.getSession();
         try {
-            return conn.selectList("Catalogo.getCatalogoById", concepto);
+            return conn.selectList("Catalogo.getCatalogoById", catalogo);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
