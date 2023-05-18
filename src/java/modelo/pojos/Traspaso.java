@@ -3,6 +3,7 @@ package modelo.pojos;
 
 public class Traspaso {
     private Integer idTraspaso;
+    private String numArete;
     private String nombreLote;
     private Integer numLote;    
     private String descripcion;
@@ -20,8 +21,9 @@ public class Traspaso {
     public Traspaso() {
     }
 
-    public Traspaso(Integer idTraspaso, String nombreLote, Integer numLote, String descripcion, String estatus, String motivo, String loteOriginal, String loteDestino, String fechaCreacion, String fechaModificacion, String fechaCancelacion, Integer idUusuario, String usuario, Integer idLote) {
+    public Traspaso(Integer idTraspaso, String numArete, String nombreLote, Integer numLote, String descripcion, String estatus, String motivo, String loteOriginal, String loteDestino, String fechaCreacion, String fechaModificacion, String fechaCancelacion, Integer idUusuario, String usuario, Integer idLote) {
         this.idTraspaso = idTraspaso;
+        this.numArete = numArete;
         this.nombreLote = nombreLote;
         this.numLote = numLote;
         this.descripcion = descripcion;
@@ -36,6 +38,8 @@ public class Traspaso {
         this.usuario = usuario;
         this.idLote = idLote;
     }
+
+    
 
     public Integer getIdTraspaso() {
         return idTraspaso;
@@ -147,6 +151,14 @@ public class Traspaso {
 
     public void setIdLote(Integer idLote) {
         this.idLote = idLote;
+    }
+
+    public String getNumArete() {
+        return numArete;
+    }
+
+    public void setNumArete(String numArete) {
+        this.numArete = numArete;
     }
     
     

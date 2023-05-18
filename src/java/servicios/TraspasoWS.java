@@ -51,12 +51,12 @@ public class TraspasoWS {
     }
 
     @GET
-    @Path("getTraspasoById/{nombreLote}")
+    @Path("getTraspasoById/{numArete}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Traspaso> getVeterinarioById(@PathParam("nombreLote") String nombreLote) {
+    public List<Traspaso> getVeterinarioById(@PathParam("numArete") String numArete) {
         SqlSession conn = MyBatisUtil.getSession();
         try {
-            return conn.selectList("Traspaso.getTraspasoById", nombreLote);
+            return conn.selectList("Traspaso.getTraspasoById", numArete);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -69,8 +69,10 @@ public class TraspasoWS {
     @Path("registrarTraspaso")
     @Produces(MediaType.APPLICATION_JSON)
     public Respuesta registrarTraspaso(
+            @FormParam("numArete") String numArete,
             @FormParam("descripcion") String descripcion,
             @FormParam("motivo") String motivo,
+            @FormParam("loteOriginal") String loteOriginal,
             @FormParam("fechaCreacion") String fechaCreacion,
             @FormParam("idUsuario") Integer idUsuario,
             @FormParam("idLote") Integer idLote) {
@@ -84,8 +86,10 @@ public class TraspasoWS {
 
         try {
             HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("numArete", numArete);
             param.put("descripcion", descripcion);
             param.put("motivo", motivo);
+            param.put("loteOriginal", loteOriginal);
             param.put("fechaCreacion", currentTime);
             param.put("idUsuario", idUsuario);
             param.put("idLote", idLote);
@@ -110,8 +114,10 @@ public class TraspasoWS {
     @Produces(MediaType.APPLICATION_JSON)
     public Respuesta actualizarTrasoasi(
             @FormParam("idTraspaso") Integer idTraspaso,
+            @FormParam("numArete") String numArete,
             @FormParam("descripcion") String descripcion,
             @FormParam("motivo") String motivo,
+            @FormParam("loteDestino") String loteDestino,
             @FormParam("fechaModificacion") String fechaModificacion,
             @FormParam("idUsuario") Integer idUsuario,
             @FormParam("idLote") Integer idLote) {
@@ -126,8 +132,10 @@ public class TraspasoWS {
         try {
             HashMap<String, Object> param = new HashMap<String, Object>();
             param.put("idTraspaso", idTraspaso);
+            param.put("numArete", numArete);
             param.put("descripcion", descripcion);
             param.put("motivo", motivo);
+            param.put("loteDestino", loteDestino);
             param.put("fechaModificacion", currentTime);
             param.put("idUsuario", idUsuario);
             param.put("idLote", idLote);
@@ -158,11 +166,15 @@ public class TraspasoWS {
 
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
+        
+        //FECHA ACTUAL
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = now.toString();
 
         try {
             HashMap<String, Object> param = new HashMap<String, Object>();
             param.put("idTraspaso", idTraspaso);
-            param.put("fechaCancelacion", fechaCancelacion);
+            param.put("fechaCancelacion", currentTime);
             param.put("motivoDeCancelacion", motivoDeCancelacion);
             param.put("idUsuario", idUsuario);
 

@@ -1,6 +1,7 @@
 
 package servicios;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,11 +77,15 @@ public class VeterinarioWS {
         
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
+        
+        //FECHA ACTUAL
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = now.toString();
 
         try{
             HashMap<String,Object> param = new HashMap<String,Object>();
             param.put("nombreVisita", nombreVisita);
-            param.put("fechaVisita", fechaVisita);
+            param.put("fechaVisita", currentTime);
             param.put("motivo", motivo);
             param.put("observaciones", observaciones);
             param.put("numArete", numArete);
@@ -115,12 +120,16 @@ public class VeterinarioWS {
 
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
+        
+        //FECHA ACTUAL
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = now.toString();
 
         try {
             HashMap<String, Object> param = new HashMap<String, Object>();
             param.put("idVisita", idVisita);
             param.put("nombreVisita", nombreVisita);
-            param.put("fechaVisita", fechaVisita);
+            param.put("fechaVisita", currentTime);
             param.put("motivo", motivo);
             param.put("observaciones", observaciones);
             param.put("numArete", numArete);

@@ -143,7 +143,7 @@ public class LoteWS {
             HashMap<String, Object> param = new HashMap<String, Object>();
             param.put("idLote", idLote);
 
-            conn.update("Cria.eliminarLote", param);
+            conn.update("Lote.eliminarLote", param);
             conn.commit();
             res.setError(false);
             res.setMensaje("Lote eliminada correctamente...");
