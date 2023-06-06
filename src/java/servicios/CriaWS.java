@@ -51,6 +51,25 @@ public class CriaWS {
     }
     
     @GET
+    @Path("getAllCriaHistorial")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Cria> getAllCriaHistorial() {
+        List<Cria> list = new ArrayList<Cria>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list=conn.selectList("Cria.getAllCria_historial");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    @GET
     @Path("getCriaById/{numArete}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cria> getCriaById(@PathParam("numArete") String numArete) {
@@ -113,7 +132,8 @@ public class CriaWS {
             @FormParam("fechaNac") String fechaNac,             //VER LO DE LA FECHA
             @FormParam("idRaza") Integer idRaza,
             @FormParam("observaciones") String observaciones,
-            @FormParam("idUsuario") Integer idUsuario) {
+            @FormParam("idUsuario") Integer idUsuario,
+            @FormParam("estatus") String estatus) {
 
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -127,6 +147,7 @@ public class CriaWS {
             param.put("idRaza", idRaza);
             param.put("observaciones", observaciones);
             param.put("idUsuario", idUsuario);
+            param.put("estatus", estatus);
 
             conn.update("Cria.actualizarCria", param);
             conn.commit();

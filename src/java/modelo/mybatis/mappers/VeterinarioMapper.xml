@@ -7,7 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getAllVeterinario" resultType="modelo.pojos.Veterinario" statementType="CALLABLE">
         {CALL ganaderia.sp_getAllVeterinario()}
     </select>
-    
+    <select id="getAllVisita_historial" resultType="modelo.pojos.Veterinario" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllHistorial_visita()}
+    </select>
     <select id="getVeterinarioById" resultType="modelo.pojos.Veterinario" statementType="CALLABLE">
         {CALL ganaderia.sp_getVeterinarioById(
         #{numArete,jdbcType=VARCHAR,mode=IN})}

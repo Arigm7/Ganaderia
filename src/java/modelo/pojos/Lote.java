@@ -5,18 +5,18 @@ public class Lote {
     private Integer idLote;
     private String nombreLote;
     private Integer numLote;
-    private String status;
+    private String estatus;
     private Integer idUsuario;
     private String usuario;
 
     public Lote() {
     }
 
-    public Lote(Integer idLote, String nombreLote, Integer numLote, String status, Integer idUsuario, String usuario) {
+    public Lote(Integer idLote, String nombreLote, Integer numLote, String estatus, Integer idUsuario, String usuario) {
         this.idLote = idLote;
         this.nombreLote = nombreLote;
         this.numLote = numLote;
-        this.status = status;
+        this.estatus = estatus;
         this.idUsuario = idUsuario;
         this.usuario = usuario;
     }
@@ -45,12 +45,12 @@ public class Lote {
         this.numLote = numLote;
     }
 
-    public String getStatus() {
-        return status;
+    public String getEstatus() {
+        return estatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
     }
 
     public Integer getIdUsuario() {

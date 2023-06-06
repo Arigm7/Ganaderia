@@ -12,6 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL ganaderia.sp_getLoteById(
         #{nombreLote,jdbcType=VARCHAR,mode=IN})}
     </select>
+    <select id="getAllLoteActivo" resultType="modelo.pojos.Lote" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllLote_activo()}
+    </select>
     
     <insert id="registrarLote" parameterType="map" statementType="CALLABLE">
         {CALL ganaderia.sp_registrarLote(
@@ -25,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{idLote,jdbcType=INTEGER,mode=IN},
         #{nombreLote,jdbcType=VARCHAR,mode=IN},
         #{numLote,jdbcType=INTEGER,mode=IN},
+        #{estatus,jdbcType=VARCHAR,mode=IN},
         #{idUsuario,jdbcType=INTEGER,mode=IN})}
     </update>
     

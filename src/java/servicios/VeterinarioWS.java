@@ -50,6 +50,25 @@ public class VeterinarioWS {
     }
     
     @GET
+    @Path("getAllVisitaHistorial")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Veterinario> getAllVisitaHistorial() {
+        List<Veterinario> list = new ArrayList<Veterinario>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list=conn.selectList("Veterinario.getAllVisita_historial");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    @GET
     @Path("getVeterinarioById/{numArete}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Veterinario> getVeterinarioById(@PathParam("numArete") String numArete) {

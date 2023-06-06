@@ -52,6 +52,25 @@ public class HatoWS {
     }
     
     @GET
+    @Path("getAllHatoActivo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Hato> getAllHatoActivo() {
+        List<Hato> list = new ArrayList<Hato>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list = conn.selectList("Hato.getAllHatoActivo");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    @GET
     @Path("getHatoById/{numArete}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Hato> getHatoById(@PathParam("numArete") String numArete) {
@@ -131,7 +150,8 @@ public class HatoWS {
             @FormParam("idUsuario") Integer idUsuario,
             @FormParam("idRaza") Integer idRaza,
             @FormParam("idLote") Integer idLote,
-            @FormParam("idRancho") Integer idRancho) {
+            @FormParam("idRancho") Integer idRancho,
+            @FormParam("estatus") String estatus) {
 
         Respuesta res = new Respuesta();
         SqlSession conn = MyBatisUtil.getSession();
@@ -153,6 +173,7 @@ public class HatoWS {
             param.put("idRaza", idRaza);
             param.put("idLote", idLote);
             param.put("idRancho", idRancho);
+            param.put("estatus", estatus);
 
             conn.update("Hato.actualizarHato", param);
             conn.commit();

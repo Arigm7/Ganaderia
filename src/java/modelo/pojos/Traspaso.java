@@ -14,6 +14,7 @@ public class Traspaso {
     private String fechaCreacion;
     private String fechaModificacion;
     private String fechaCancelacion;
+    private String motivoDeCancelacion;
     private Integer idUusuario;
     private String usuario;
     private Integer idLote;
@@ -21,7 +22,7 @@ public class Traspaso {
     public Traspaso() {
     }
 
-    public Traspaso(Integer idTraspaso, String numArete, String nombreLote, Integer numLote, String descripcion, String estatus, String motivo, String loteOriginal, String loteDestino, String fechaCreacion, String fechaModificacion, String fechaCancelacion, Integer idUusuario, String usuario, Integer idLote) {
+    public Traspaso(Integer idTraspaso, String numArete, String nombreLote, Integer numLote, String descripcion, String estatus, String motivo, String loteOriginal, String loteDestino, String fechaCreacion, String fechaModificacion, String fechaCancelacion, String motivoDeCancelacion, Integer idUusuario, String usuario, Integer idLote) {
         this.idTraspaso = idTraspaso;
         this.numArete = numArete;
         this.nombreLote = nombreLote;
@@ -34,10 +35,13 @@ public class Traspaso {
         this.fechaCreacion = fechaCreacion;
         this.fechaModificacion = fechaModificacion;
         this.fechaCancelacion = fechaCancelacion;
+        this.motivoDeCancelacion = motivoDeCancelacion;
         this.idUusuario = idUusuario;
         this.usuario = usuario;
         this.idLote = idLote;
     }
+
+    
 
     
 
@@ -159,6 +163,14 @@ public class Traspaso {
 
     public void setNumArete(String numArete) {
         this.numArete = numArete;
+    }
+
+    public String getMotivoDeCancelacion() {
+        return motivoDeCancelacion;
+    }
+
+    public void setMotivoDeCancelacion(String motivoDeCancelacion) {
+        this.motivoDeCancelacion = motivoDeCancelacion;
     }
     
     

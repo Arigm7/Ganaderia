@@ -8,22 +8,28 @@ public class Cria {
     private String fechaNac;
     private String estatus;
     private Integer idRaza;
+    private String raza;
     private String observaciones;
-    private Integer idUusuario;
+    private String usuario;
+    private Integer idUsuario;
 
     public Cria() {
     }
 
-    public Cria(Integer idCria, String numArete, String sexo, String fechaNac, String estatus, Integer idRaza, String observaciones, Integer idUusuario) {
+    public Cria(Integer idCria, String numArete, String sexo, String fechaNac, String estatus, Integer idRaza, String raza, String observaciones, String usuario, Integer idUsuario) {
         this.idCria = idCria;
         this.numArete = numArete;
         this.sexo = sexo;
         this.fechaNac = fechaNac;
         this.estatus = estatus;
         this.idRaza = idRaza;
+        this.raza = raza;
         this.observaciones = observaciones;
-        this.idUusuario = idUusuario;
+        this.usuario = usuario;
+        this.idUsuario = idUsuario;
     }
+
+    
 
     public Integer getIdCria() {
         return idCria;
@@ -81,13 +87,31 @@ public class Cria {
         this.observaciones = observaciones;
     }
 
-    public Integer getIdUusuario() {
-        return idUusuario;
+    public String getRaza() {
+        return raza;
     }
 
-    public void setIdUusuario(Integer idUusuario) {
-        this.idUusuario = idUusuario;
+    public void setRaza(String raza) {
+        this.raza = raza;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    
     
     
 }

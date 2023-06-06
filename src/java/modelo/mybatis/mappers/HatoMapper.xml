@@ -7,6 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getAllHato" resultType="modelo.pojos.Hato" statementType="CALLABLE">
         {CALL ganaderia.sp_getAllHato()}
     </select>
+    <select id="getAllHatoActivo" resultType="modelo.pojos.Hato" statementType="CALLABLE">
+        {CALL ganaderia.sp_getAllHato_activo()}
+    </select>
     
     <select id="getHatoById" resultType="modelo.pojos.Hato" statementType="CALLABLE">
         {CALL ganaderia.sp_getHatoById(
@@ -18,8 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{numArete,jdbcType=VARCHAR,mode=IN},
         #{sexo,jdbcType=VARCHAR,mode=IN},
         #{descripcion,jdbcType=VARCHAR,mode=IN},
-        #{imagen1,jdbcType=BIT,mode=IN},
-        #{imagen2,jdbcType=BIT,mode=IN},
         #{tipoGanado,jdbcType=VARCHAR,mode=IN},
         #{diaDeAlta,jdbcType=DATE,mode=IN},
         #{idUsuario,jdbcType=INTEGER,mode=IN},
@@ -33,14 +34,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{numArete,jdbcType=VARCHAR,mode=IN},
         #{sexo,jdbcType=VARCHAR,mode=IN},
         #{descripcion,jdbcType=VARCHAR,mode=IN},
-        #{imagen1,jdbcType=BIT,mode=IN},
-        #{imagen2,jdbcType=BIT,mode=IN},
         #{tipoGanado,jdbcType=VARCHAR,mode=IN},
         #{diaDeModificacion,jdbcType=DATE,mode=IN},
         #{idUsuario,jdbcType=INTEGER,mode=IN},
         #{idRaza,jdbcType=INTEGER,mode=IN},
         #{idLote,jdbcType=INTEGER,mode=IN},
-        #{idRancho,jdbcType=INTEGER,mode=IN})}
+        #{idRancho,jdbcType=INTEGER,mode=IN},
+        #{estatus,jdbcType=INTEGER,mode=IN})}
     </update>
     
     <update id="eliminarHato" parameterType="map" statementType="CALLABLE">

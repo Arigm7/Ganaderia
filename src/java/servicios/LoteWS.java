@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.Lote;
 import modelo.pojos.Respuesta;
+import modelo.pojos.Usuario;
 import org.apache.ibatis.session.SqlSession;
 
 
@@ -49,6 +50,24 @@ public class LoteWS {
         return list;
     }
 
+    @GET
+    @Path("getAllLoteActivo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Lote> getAllLoteActivo() {
+        List<Lote> list = new ArrayList<Lote>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list = conn.selectList("Lote.getAllLoteActivo");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
     @GET
     @Path("getLoteById/{nombreLote}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -103,6 +122,7 @@ public class LoteWS {
             @FormParam("idLote") Integer idLote,
             @FormParam("nombreLote") String nombreLote,
             @FormParam("numLote") Integer numLote,
+            @FormParam("estatus") String estatus,
             @FormParam("idUsuario") Integer idUsuario) {
 
         Respuesta res = new Respuesta();
@@ -113,6 +133,7 @@ public class LoteWS {
             param.put("idLote", idLote);
             param.put("nombreLote", nombreLote);
             param.put("numLote", numLote);
+            param.put("estatus", estatus);
             param.put("idUsuario", idUsuario);
 
             conn.update("Lote.actualizarLote", param);

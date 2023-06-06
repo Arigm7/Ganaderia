@@ -51,6 +51,25 @@ public class TraspasoWS {
     }
 
     @GET
+    @Path("getAllTraspasoHistorial")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Traspaso> getAllTraspasoHistorial() {
+        List<Traspaso> list = new ArrayList<Traspaso>();
+        SqlSession conn = null;
+        try {
+            conn = MyBatisUtil.getSession();
+            list=conn.selectList("Traspaso.getAllTraspaso_historial");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    @GET
     @Path("getTraspasoById/{numArete}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Traspaso> getVeterinarioById(@PathParam("numArete") String numArete) {
@@ -72,7 +91,6 @@ public class TraspasoWS {
             @FormParam("numArete") String numArete,
             @FormParam("descripcion") String descripcion,
             @FormParam("motivo") String motivo,
-            @FormParam("loteOriginal") String loteOriginal,
             @FormParam("fechaCreacion") String fechaCreacion,
             @FormParam("idUsuario") Integer idUsuario,
             @FormParam("idLote") Integer idLote) {
@@ -89,10 +107,10 @@ public class TraspasoWS {
             param.put("numArete", numArete);
             param.put("descripcion", descripcion);
             param.put("motivo", motivo);
-            param.put("loteOriginal", loteOriginal);
             param.put("fechaCreacion", currentTime);
             param.put("idUsuario", idUsuario);
             param.put("idLote", idLote);
+   
 
             conn.insert("Traspaso.registrarTraspaso", param);
             conn.commit();
@@ -117,7 +135,6 @@ public class TraspasoWS {
             @FormParam("numArete") String numArete,
             @FormParam("descripcion") String descripcion,
             @FormParam("motivo") String motivo,
-            @FormParam("loteDestino") String loteDestino,
             @FormParam("fechaModificacion") String fechaModificacion,
             @FormParam("idUsuario") Integer idUsuario,
             @FormParam("idLote") Integer idLote) {
@@ -135,7 +152,6 @@ public class TraspasoWS {
             param.put("numArete", numArete);
             param.put("descripcion", descripcion);
             param.put("motivo", motivo);
-            param.put("loteDestino", loteDestino);
             param.put("fechaModificacion", currentTime);
             param.put("idUsuario", idUsuario);
             param.put("idLote", idLote);
