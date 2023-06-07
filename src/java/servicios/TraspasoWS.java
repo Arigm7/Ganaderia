@@ -177,6 +177,7 @@ public class TraspasoWS {
     public Respuesta eliminarTraspaso(
             @FormParam("idTraspaso") Integer idTraspaso,
             @FormParam("fechaCancelacion") String fechaCancelacion,
+            @FormParam("numArete") String numArete,
             @FormParam("motivoDeCancelacion") String motivoDeCancelacion,
             @FormParam("idUsuario") Integer idUsuario) {
 
@@ -190,6 +191,7 @@ public class TraspasoWS {
         try {
             HashMap<String, Object> param = new HashMap<String, Object>();
             param.put("idTraspaso", idTraspaso);
+            param.put("numArete", numArete);
             param.put("fechaCancelacion", currentTime);
             param.put("motivoDeCancelacion", motivoDeCancelacion);
             param.put("idUsuario", idUsuario);

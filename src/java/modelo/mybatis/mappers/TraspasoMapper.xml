@@ -39,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="eliminarTraspaso" parameterType="map" statementType="CALLABLE">
         {CALL ganaderia.sp_eliminarTraspaso(
         #{idTraspaso,jdbcType=INTEGER,mode=IN},
+        #{numArete,jdbcType=VARCHAR,mode=IN},
         #{fechaCancelacion,jdbcType=DATE,mode=IN},
         #{motivoDeCancelacion,jdbcType=VARCHAR,mode=IN},
         #{idUsuario,jdbcType=INTEGER,mode=IN})}
